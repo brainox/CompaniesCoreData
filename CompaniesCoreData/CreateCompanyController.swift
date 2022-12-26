@@ -13,7 +13,7 @@ protocol CreateCompanyCompanyDelegate: AnyObject {
     func didEditCompany(company: Company)
 }
 
-class CreateCompanyCompany: UIViewController {
+class CreateCompanyCompany: UIViewController{
     weak var delegate: CreateCompanyCompanyDelegate?
     var company: Company? {
         didSet {
@@ -23,6 +23,16 @@ class CreateCompanyCompany: UIViewController {
         }
     }
     
+    private lazy var companyImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "select_photo_empty")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
+        imageView.layer.cornerRadius = 50
+        return imageView
+    }()
+    
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
@@ -30,21 +40,21 @@ class CreateCompanyCompany: UIViewController {
         return label
     }()
     
-    let lightBlueBackgroundView: UIView = {
+    private lazy var lightBlueBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .lightBlue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let nameTextField: UITextField = {
+    private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter name"
         textField.translatesAutoresizingMaskIntoConstraints = false
         return textField
     }()
     
-    let datePicker: UIDatePicker = {
+    private lazy var datePicker: UIDatePicker = {
         let dp = UIDatePicker()
         dp.translatesAutoresizingMaskIntoConstraints = false
         dp.datePickerMode = .date
@@ -73,13 +83,19 @@ class CreateCompanyCompany: UIViewController {
         view.addSubview(nameLabel)
         view.addSubview(nameTextField)
         view.addSubview(datePicker)
+        view.addSubview(companyImageView)
         
         lightBlueBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         lightBlueBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         lightBlueBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        lightBlueBackgroundView.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        lightBlueBackgroundView.heightAnchor.constraint(equalToConstant: 350).isActive = true
         
-        nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        companyImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
+        companyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        companyImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        companyImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        nameLabel.topAnchor.constraint(equalTo: companyImageView.bottomAnchor).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
         nameLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
         nameLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -140,8 +156,29 @@ class CreateCompanyCompany: UIViewController {
         } else {
             saveCompanyChanges()
         }
-        
     }
-    
 }
 
+extension CreateCompanyCompany: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    @objc func handleSelectPhoto() {
+        print("handle was tapped")
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.modalPresentationStyle = .fullScreen
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            companyImageView.image = editedImage
+        } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            companyImageView.image = originalImage
+        }
+        dismiss(animated: true)
+    }
+}

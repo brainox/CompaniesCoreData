@@ -13,3 +13,9 @@ class CustomNavigationController: UINavigationController {
         .lightContent
     }
 }
+
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+}
