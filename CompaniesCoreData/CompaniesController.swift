@@ -82,7 +82,7 @@ class CompaniesController: UITableViewController {
             editCompanyController.delegate = self
             editCompanyController.company = self.companies[indexPath.row]
             let navController = CustomNavigationController(rootViewController: editCompanyController)
-            
+            navController.modalPresentationStyle = .fullScreen
             self.present(navController, animated: true)
         }
         editActionContextItem.backgroundColor = .darkBlue
@@ -106,8 +106,20 @@ class CompaniesController: UITableViewController {
         let company = companies[indexPath.row]
         
         var content = cell.defaultContentConfiguration()
-        // Configure content.
-        content.text = company.name
+        // Configure content
+        if let name = company.name, let founded = company.founded {
+            
+//            "MMM dd, yyyy"
+            let dateFormater = DateFormatter()
+            dateFormater.dateFormat = "MMM dd, yyyy"
+            
+            let foundedDateString = dateFormater.string(from: founded)
+//            let locale = Locale(identifier: "EN")
+            let dateString = "\(name) - Founded: \(foundedDateString)"
+            content.text = dateString
+        } else {
+            content.text = company.name
+        }
         content.textProperties.color = .white
         content.textProperties.font = .boldSystemFont(ofSize: 16)
         
