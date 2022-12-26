@@ -10,10 +10,16 @@ import CoreData
 
 protocol CreateCompanyCompanyDelegate: AnyObject {
     func didAddCompany(company: Company)
+    func didEditCompany(company: Company)
 }
 
 class CreateCompanyCompany: UIViewController {
     weak var delegate: CreateCompanyCompanyDelegate?
+    var company: Company? {
+        didSet {
+            nameTextField.text = company?.name
+        }
+    }
     
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
@@ -36,12 +42,15 @@ class CreateCompanyCompany: UIViewController {
         return textField
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = company == nil ? "Create Company" : "Edit Company"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
-        
-        navigationItem.title = "Create Company"
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
@@ -76,7 +85,15 @@ class CreateCompanyCompany: UIViewController {
     }
     
     @objc func handleSave() {
+        if company == nil {
+            createCompany()
+        } else {
+            saveCompanyChanges()
+        }
         
+    }
+    
+    func createCompany() {
         // Initialization of the Core data stack
        
         let context = CoreDataManager.shared.persistentContainer.viewContext
@@ -90,6 +107,19 @@ class CreateCompanyCompany: UIViewController {
             
             dismiss(animated: true) {
                 self.delegate?.didAddCompany(company: company as! Company)
+            }
+        } catch let saveErr {
+            print("Failed to save company: \(saveErr)")
+        }
+    }
+    
+    func saveCompanyChanges() {
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        company?.name = nameTextField.text
+        do {
+            try context.save()
+            dismiss(animated: true) {
+                self.delegate?.didEditCompany(company: self.company!)
             }
         } catch let saveErr {
             print("Failed to save company: \(saveErr)")

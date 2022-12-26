@@ -9,9 +9,8 @@ import UIKit
 import CoreData
 
 class CompaniesController: UITableViewController {
-    
     var companies = [Company]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,15 +25,15 @@ class CompaniesController: UITableViewController {
     }
     
     func fetchCompanies() {
-
+        
         let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
         
         do {
-             companies = try context.fetch(fetchRequest)
+            companies = try context.fetch(fetchRequest)
             tableView.reloadData()
-           
+            
         } catch let fetchErr {
             print("Failed to fetch companies: \(fetchErr)")
         }
@@ -53,32 +52,42 @@ class CompaniesController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-       let deleteActionContextItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
-           let company = self.companies[indexPath.row]
-           self.companies.remove(at: indexPath.row)
-           self.tableView.deleteRows(at: [indexPath], with: .automatic)
-           
-           // delete the company from coredata
-           let context = CoreDataManager.shared.persistentContainer.viewContext
-           context.delete(company)
-           
-           do {
-               try context.save()
-           } catch let saveErr {
-               print("Failed to save company: \(saveErr)")
-           }
-           
-           
-       }
-        
-        let editActionContextItem = UIContextualAction(style: .normal, title: "Edit") { (contextualAction, view, boolValue) in
+        let swipeActions = UISwipeActionsConfiguration(actions: [deleteActionFunction(indexPath), editActionFunction(indexPath)])
+        return swipeActions
+    }
+    
+    func deleteActionFunction(_ indexPath: IndexPath) -> UIContextualAction {
+        let deleteActionContextItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
+            let company = self.companies[indexPath.row]
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
+            // delete the company from coredata
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(company)
+            
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to save company: \(saveErr)")
+            }
         }
-
-       let swipeActions = UISwipeActionsConfiguration(actions: [deleteActionContextItem, editActionContextItem])
-
-       return swipeActions
-   }
+        deleteActionContextItem.backgroundColor = .lightRed
+        return deleteActionContextItem
+    }
+    
+    func editActionFunction(_ indexPath: IndexPath) -> UIContextualAction {
+        let editActionContextItem = UIContextualAction(style: .normal, title: "Edit") { (contextualAction, view, boolValue) in
+            let editCompanyController = CreateCompanyCompany()
+            editCompanyController.delegate = self
+            editCompanyController.company = self.companies[indexPath.row]
+            let navController = CustomNavigationController(rootViewController: editCompanyController)
+            
+            self.present(navController, animated: true)
+        }
+        editActionContextItem.backgroundColor = .darkBlue
+        return editActionContextItem
+    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView()
@@ -101,7 +110,7 @@ class CompaniesController: UITableViewController {
         content.text = company.name
         content.textProperties.color = .white
         content.textProperties.font = .boldSystemFont(ofSize: 16)
-
+        
         cell.contentConfiguration = content
         return cell
     }
@@ -109,8 +118,6 @@ class CompaniesController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companies.count
     }
-
-
 }
 
 extension CompaniesController: CreateCompanyCompanyDelegate {
@@ -118,5 +125,11 @@ extension CompaniesController: CreateCompanyCompanyDelegate {
         companies.append(company)
         let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
         tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+    
+    func didEditCompany(company: Company) {
+        let row = companies.firstIndex(of: company)!
+        let reloadIndex = IndexPath(row: row, section: 0)
+        tableView.reloadRows(at: [reloadIndex], with: .middle)
     }
 }
