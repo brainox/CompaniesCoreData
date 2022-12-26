@@ -6,18 +6,16 @@
 //
 
 import UIKit
+import CoreData
 
 class CompaniesController: UITableViewController {
     
-    let companies = [
-        Company(name: "Google", founded: Date()),
-        Company(name: "Apple", founded: Date()),
-        Company(name: "Facebook", founded: Date()),
-        Company(name: "Amazon", founded: Date()),
-    ]
+    var companies = [Company]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.fetchCompanies()
         view.backgroundColor = .systemBackground
         setUpNavigationStyle()
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "plus")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
@@ -27,11 +25,26 @@ class CompaniesController: UITableViewController {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
     }
     
+    func fetchCompanies() {
+
+        let context = CoreDataManager.shared.persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
+        
+        do {
+             companies = try context.fetch(fetchRequest)
+            tableView.reloadData()
+           
+        } catch let fetchErr {
+            print("Failed to fetch companies: \(fetchErr)")
+        }
+    }
     
     @objc func handleAddCompany() {
         let createCompanyCompany = CreateCompanyCompany()
         let navController = CustomNavigationController(rootViewController: createCompanyCompany)
         navController.modalPresentationStyle = .fullScreen
+        createCompanyCompany.delegate = self
         present(navController, animated: true)
     }
     
@@ -72,3 +85,10 @@ class CompaniesController: UITableViewController {
 
 }
 
+extension CompaniesController: CreateCompanyCompanyDelegate {
+    func didAddCompany(company: Company) {
+        companies.append(company)
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+}

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE3CB4732959B16400DFB8BC /* CompanyCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE3CB4712959B16300DFB8BC /* CompanyCoreData.xcdatamodeld */; };
+		BE3CB4752959BFA400DFB8BC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */; };
 		BE428886295341EF007B9F06 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428885295341EF007B9F06 /* Company.swift */; };
 		BE42888829534752007B9F06 /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42888729534752007B9F06 /* CreateCompanyController.swift */; };
 		BEDCC69A2952979C008D04B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC6992952979C008D04B2 /* AppDelegate.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE3CB4722959B16400DFB8BC /* CompanyCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyCoreData.xcdatamodel; sourceTree = "<group>"; };
+		BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BE428885295341EF007B9F06 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		BE42888729534752007B9F06 /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
 		BEDCC6962952979C008D04B2 /* CompaniesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompaniesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +75,8 @@
 				BE42888729534752007B9F06 /* CreateCompanyController.swift */,
 				BEDCC6AF2952AE8E008D04B2 /* UIColor+theme.swift */,
 				BE428885295341EF007B9F06 /* Company.swift */,
+				BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */,
+				BE3CB4712959B16300DFB8BC /* CompanyCoreData.xcdatamodeld */,
 				BEDCC69F2952979C008D04B2 /* Main.storyboard */,
 				BEDCC6A22952979E008D04B2 /* Assets.xcassets */,
 				BEDCC6A42952979E008D04B2 /* LaunchScreen.storyboard */,
@@ -156,6 +162,8 @@
 				BE42888829534752007B9F06 /* CreateCompanyController.swift in Sources */,
 				BEDCC6B02952AE8E008D04B2 /* UIColor+theme.swift in Sources */,
 				BEDCC69C2952979C008D04B2 /* SceneDelegate.swift in Sources */,
+				BE3CB4752959BFA400DFB8BC /* CoreDataManager.swift in Sources */,
+				BE3CB4732959B16400DFB8BC /* CompanyCoreData.xcdatamodeld in Sources */,
 				BE428886295341EF007B9F06 /* Company.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -374,6 +382,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BE3CB4712959B16300DFB8BC /* CompanyCoreData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BE3CB4722959B16400DFB8BC /* CompanyCoreData.xcdatamodel */,
+			);
+			currentVersion = BE3CB4722959B16400DFB8BC /* CompanyCoreData.xcdatamodel */;
+			path = CompanyCoreData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BEDCC68E2952979C008D04B2 /* Project object */;
 }

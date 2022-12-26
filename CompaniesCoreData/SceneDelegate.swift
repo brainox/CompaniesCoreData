@@ -40,6 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         barButtonItemAppearance.focused.titleTextAttributes = [.foregroundColor: UIColor.white]
         
         appearance.backgroundColor = UIColor.lightRed
+        
         appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         appearance.buttonAppearance = barButtonItemAppearance
