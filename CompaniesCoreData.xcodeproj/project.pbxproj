@@ -19,6 +19,7 @@
 		BEDCC6A62952979E008D04B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEDCC6A42952979E008D04B2 /* LaunchScreen.storyboard */; };
 		BEDCC6AE2952A282008D04B2 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC6AD2952A282008D04B2 /* CustomNavigationController.swift */; };
 		BEDCC6B02952AE8E008D04B2 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC6AF2952AE8E008D04B2 /* UIColor+theme.swift */; };
+		BEE4221D295C1CF4009F3262 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE4221C295C1CF4009F3262 /* CompanyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		BEDCC6A72952979E008D04B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEDCC6AD2952A282008D04B2 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		BEDCC6AF2952AE8E008D04B2 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
+		BEE4221C295C1CF4009F3262 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,10 +70,10 @@
 		BEDCC6982952979C008D04B2 /* CompaniesCoreData */ = {
 			isa = PBXGroup;
 			children = (
+				BEE4221E295C1E41009F3262 /* Companies */,
 				BEDCC6992952979C008D04B2 /* AppDelegate.swift */,
 				BEDCC69B2952979C008D04B2 /* SceneDelegate.swift */,
 				BEDCC6AD2952A282008D04B2 /* CustomNavigationController.swift */,
-				BEDCC69D2952979C008D04B2 /* CompaniesController.swift */,
 				BE42888729534752007B9F06 /* CreateCompanyController.swift */,
 				BEDCC6AF2952AE8E008D04B2 /* UIColor+theme.swift */,
 				BE428885295341EF007B9F06 /* Company.swift */,
@@ -83,6 +85,15 @@
 				BEDCC6A72952979E008D04B2 /* Info.plist */,
 			);
 			path = CompaniesCoreData;
+			sourceTree = "<group>";
+		};
+		BEE4221E295C1E41009F3262 /* Companies */ = {
+			isa = PBXGroup;
+			children = (
+				BEDCC69D2952979C008D04B2 /* CompaniesController.swift */,
+				BEE4221C295C1CF4009F3262 /* CompanyCell.swift */,
+			);
+			path = Companies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +172,7 @@
 				BEDCC69A2952979C008D04B2 /* AppDelegate.swift in Sources */,
 				BE42888829534752007B9F06 /* CreateCompanyController.swift in Sources */,
 				BEDCC6B02952AE8E008D04B2 /* UIColor+theme.swift in Sources */,
+				BEE4221D295C1CF4009F3262 /* CompanyCell.swift in Sources */,
 				BEDCC69C2952979C008D04B2 /* SceneDelegate.swift in Sources */,
 				BE3CB4752959BFA400DFB8BC /* CoreDataManager.swift in Sources */,
 				BE3CB4732959B16400DFB8BC /* CompanyCoreData.xcdatamodeld in Sources */,
