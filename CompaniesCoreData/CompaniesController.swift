@@ -122,7 +122,13 @@ class CompaniesController: UITableViewController {
         }
         content.textProperties.color = .white
         content.textProperties.font = .boldSystemFont(ofSize: 16)
-        
+        content.image = UIImage(named: "select_photo_empty")
+        if let imageData = company.imageData {
+            content.image = UIImage(data: imageData)
+        } 
+        content.imageProperties.maximumSize = CGSize(width: 50, height: 50)
+        content.imageProperties.cornerRadius = 25
+       
         cell.contentConfiguration = content
         return cell
     }

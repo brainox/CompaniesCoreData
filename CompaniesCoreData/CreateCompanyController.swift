@@ -18,8 +18,13 @@ class CreateCompanyCompany: UIViewController{
     var company: Company? {
         didSet {
             nameTextField.text = company?.name
+            if let imageData = company?.imageData {
+                companyImageView.image = UIImage(data: imageData)
+
+            }
             guard let founded = company?.founded else { return }
             datePicker.date = founded
+            
         }
     }
     
@@ -28,8 +33,8 @@ class CreateCompanyCompany: UIViewController{
         imageView.image = UIImage(named: "select_photo_empty")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isUserInteractionEnabled = true
+        imageView.contentMode = .scaleAspectFill
         imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
-        imageView.layer.cornerRadius = 50
         return imageView
     }()
     
@@ -62,11 +67,6 @@ class CreateCompanyCompany: UIViewController{
         return dp
     }()
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationItem.title = company == nil ? "Create Company" : "Edit Company"
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -76,6 +76,16 @@ class CreateCompanyCompany: UIViewController{
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
         
         view.backgroundColor = UIColor.darkBlue
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationItem.title = company == nil ? "Create Company" : "Edit Company"
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setupCircularImageStyle()
     }
     
     private func setupUI() {
@@ -110,15 +120,25 @@ class CreateCompanyCompany: UIViewController{
         datePicker.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         datePicker.bottomAnchor.constraint(equalTo: lightBlueBackgroundView.bottomAnchor).isActive = true
     }
+    
+    private func setupCircularImageStyle() {
+         companyImageView.layer.cornerRadius = companyImageView.frame.width/2
+         companyImageView.clipsToBounds = true
+         companyImageView.layer.borderColor = UIColor.darkBlue.cgColor
+         companyImageView.layer.borderWidth = 2
+     }
 
     func createCompany() {
         // Initialization of the Core data stack
-       
         let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
         company.setValue(nameTextField.text, forKey: "name")
         company.setValue(datePicker.date, forKey: "founded")
+        if let companyImage = companyImageView.image {
+            let imageData = companyImage.jpegData(compressionQuality: 0.7)
+            company.setValue(imageData, forKey: "imageData")
+        }
         
         // perform the save
         do {
@@ -136,6 +156,10 @@ class CreateCompanyCompany: UIViewController{
         let context = CoreDataManager.shared.persistentContainer.viewContext
         company?.name = nameTextField.text
         company?.founded = datePicker.date
+        if let companyImage = companyImageView.image {
+            let imageData = companyImage.jpegData(compressionQuality: 0.7)
+            company?.imageData = imageData
+        }
         do {
             try context.save()
             dismiss(animated: true) {
@@ -161,7 +185,6 @@ class CreateCompanyCompany: UIViewController{
 
 extension CreateCompanyCompany: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     @objc func handleSelectPhoto() {
-        print("handle was tapped")
         let imagePickerController = UIImagePickerController()
         imagePickerController.modalPresentationStyle = .fullScreen
         imagePickerController.delegate = self
@@ -179,6 +202,7 @@ extension CreateCompanyCompany: UINavigationControllerDelegate, UIImagePickerCon
         } else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             companyImageView.image = originalImage
         }
+        setupCircularImageStyle()
         dismiss(animated: true)
     }
 }
