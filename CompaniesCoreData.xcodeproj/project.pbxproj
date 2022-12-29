@@ -20,6 +20,8 @@
 		BEDCC6AE2952A282008D04B2 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC6AD2952A282008D04B2 /* CustomNavigationController.swift */; };
 		BEDCC6B02952AE8E008D04B2 /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC6AF2952AE8E008D04B2 /* UIColor+theme.swift */; };
 		BEE4221D295C1CF4009F3262 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE4221C295C1CF4009F3262 /* CompanyCell.swift */; };
+		BEFCA067295E0FFE009B576E /* CompaniesController+CreateCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCA066295E0FFE009B576E /* CompaniesController+CreateCompany.swift */; };
+		BEFCA069295E106F009B576E /* CompaniesController+UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCA068295E106F009B576E /* CompaniesController+UITableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		BEDCC6AD2952A282008D04B2 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		BEDCC6AF2952AE8E008D04B2 /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
 		BEE4221C295C1CF4009F3262 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
+		BEFCA066295E0FFE009B576E /* CompaniesController+CreateCompany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+CreateCompany.swift"; sourceTree = "<group>"; };
+		BEFCA068295E106F009B576E /* CompaniesController+UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CompaniesController+UITableView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,8 @@
 			children = (
 				BEDCC69D2952979C008D04B2 /* CompaniesController.swift */,
 				BEE4221C295C1CF4009F3262 /* CompanyCell.swift */,
+				BEFCA066295E0FFE009B576E /* CompaniesController+CreateCompany.swift */,
+				BEFCA068295E106F009B576E /* CompaniesController+UITableView.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
@@ -167,8 +173,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFCA067295E0FFE009B576E /* CompaniesController+CreateCompany.swift in Sources */,
 				BEDCC6AE2952A282008D04B2 /* CustomNavigationController.swift in Sources */,
 				BEDCC69E2952979C008D04B2 /* CompaniesController.swift in Sources */,
+				BEFCA069295E106F009B576E /* CompaniesController+UITableView.swift in Sources */,
 				BEDCC69A2952979C008D04B2 /* AppDelegate.swift in Sources */,
 				BE42888829534752007B9F06 /* CreateCompanyController.swift in Sources */,
 				BEDCC6B02952AE8E008D04B2 /* UIColor+theme.swift in Sources */,

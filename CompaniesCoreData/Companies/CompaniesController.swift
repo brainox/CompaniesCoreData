@@ -53,36 +53,15 @@ class CompaniesController: UITableViewController {
         return 50
     }
     
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! CompanyCell
         
         let company = companies[indexPath.row]
-        
-        var content = cell.defaultContentConfiguration()
-        // Configure content
-        if let name = company.name, let founded = company.founded {
-            
-//            "MMM dd, yyyy"
-            let dateFormater = DateFormatter()
-            dateFormater.dateFormat = "MMM dd, yyyy"
-            
-            let foundedDateString = dateFormater.string(from: founded)
-//            let locale = Locale(identifier: "EN")
-            let dateString = "\(name) - Founded: \(foundedDateString)"
-            content.text = dateString
-        } else {
-            content.text = company.name
-        }
-        content.textProperties.color = .white
-        content.textProperties.font = .boldSystemFont(ofSize: 16)
-        content.image = UIImage(named: "select_photo_empty")
-        if let imageData = company.imageData {
-            content.image = UIImage(data: imageData)
-        }
-        content.imageProperties.maximumSize = CGSize(width: 50, height: 50)
-        content.imageProperties.cornerRadius = 25
-       
-        cell.contentConfiguration = content
+        cell.company = company
         return cell
     }
     
@@ -163,19 +142,5 @@ class CompaniesController: UITableViewController {
         } catch let delErr {
             print("Failed to delete objects from Core Data: \(delErr)" )
         }
-    }
-}
-
-extension CompaniesController: CreateCompanyCompanyDelegate {
-    func didAddCompany(company: Company) {
-        companies.append(company)
-        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
-    }
-    
-    func didEditCompany(company: Company) {
-        let row = companies.firstIndex(of: company)!
-        let reloadIndex = IndexPath(row: row, section: 0)
-        tableView.reloadRows(at: [reloadIndex], with: .middle)
     }
 }

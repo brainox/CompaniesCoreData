@@ -8,13 +8,13 @@
 import UIKit
 import CoreData
 
-protocol CreateCompanyCompanyDelegate: AnyObject {
+protocol CreateCompanyDelegate: AnyObject {
     func didAddCompany(company: Company)
     func didEditCompany(company: Company)
 }
 
 class CreateCompanyCompany: UIViewController{
-    weak var delegate: CreateCompanyCompanyDelegate?
+    weak var delegate: CreateCompanyDelegate?
     var company: Company? {
         didSet {
             nameTextField.text = company?.name
