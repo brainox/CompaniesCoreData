@@ -8,6 +8,12 @@
 import UIKit
 
 extension CompaniesController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let company = self.companies[indexPath.row]
+        let employeesController = EmployeesController()
+        employeesController.company = company
+        navigationController?.pushViewController(employeesController, animated:true)
+    }
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let swipeActions = UISwipeActionsConfiguration(actions: [deleteActionFunction(indexPath), editActionFunction(indexPath)])
         return swipeActions

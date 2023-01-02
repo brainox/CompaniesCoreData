@@ -72,7 +72,7 @@ class CreateCompanyCompany: UIViewController{
         
         setupUI()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
+        setupCancelButtonInNavBar()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
         
         view.backgroundColor = UIColor.darkBlue
@@ -168,10 +168,6 @@ class CreateCompanyCompany: UIViewController{
         } catch let saveErr {
             print("Failed to save company: \(saveErr)")
         }
-    }
-    
-    @objc func handleCancel() {
-        dismiss(animated: true)
     }
     
     @objc func handleSave() {
