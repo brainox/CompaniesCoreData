@@ -45,13 +45,6 @@ class CreateCompanyCompany: UIViewController{
         return label
     }()
     
-    private lazy var lightBlueBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .lightBlue
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter name"
@@ -89,16 +82,15 @@ class CreateCompanyCompany: UIViewController{
     }
     
     private func setupUI() {
-        view.addSubview(lightBlueBackgroundView)
+        
+       let lightBlueBackgroundView = setupLightBlueBackgroundView(height: 350)
+        
         view.addSubview(nameLabel)
         view.addSubview(nameTextField)
         view.addSubview(datePicker)
         view.addSubview(companyImageView)
         
-        lightBlueBackgroundView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        lightBlueBackgroundView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        lightBlueBackgroundView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        lightBlueBackgroundView.heightAnchor.constraint(equalToConstant: 350).isActive = true
+        
         
         companyImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 8).isActive = true
         companyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

@@ -85,7 +85,6 @@
 				BEDCC6992952979C008D04B2 /* AppDelegate.swift */,
 				BEDCC69B2952979C008D04B2 /* SceneDelegate.swift */,
 				BEDCC6AD2952A282008D04B2 /* CustomNavigationController.swift */,
-				BE42888729534752007B9F06 /* CreateCompanyController.swift */,
 				BEDCC6AF2952AE8E008D04B2 /* UIColor+theme.swift */,
 				BE428885295341EF007B9F06 /* Company.swift */,
 				BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */,
@@ -111,6 +110,7 @@
 			children = (
 				BEDCC69D2952979C008D04B2 /* CompaniesController.swift */,
 				BEE4221C295C1CF4009F3262 /* CompanyCell.swift */,
+				BE42888729534752007B9F06 /* CreateCompanyController.swift */,
 				BEFCA066295E0FFE009B576E /* CompaniesController+CreateCompany.swift */,
 				BEFCA068295E106F009B576E /* CompaniesController+UITableView.swift */,
 				BEDE3071296376AF00BF0C38 /* EmployeesController.swift */,
