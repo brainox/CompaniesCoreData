@@ -61,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE38DF33296723BB00AEC13D /* Employees */ = {
+			isa = PBXGroup;
+			children = (
+				BEDE3071296376AF00BF0C38 /* EmployeesController.swift */,
+				BEDE3076296385EE00BF0C38 /* CreateEmployeeController.swift */,
+			);
+			path = Employees;
+			sourceTree = "<group>";
+		};
 		BEDCC68D2952979C008D04B2 = {
 			isa = PBXGroup;
 			children = (
@@ -108,13 +117,12 @@
 		BEE4221E295C1E41009F3262 /* Companies */ = {
 			isa = PBXGroup;
 			children = (
+				BE38DF33296723BB00AEC13D /* Employees */,
 				BEDCC69D2952979C008D04B2 /* CompaniesController.swift */,
 				BEE4221C295C1CF4009F3262 /* CompanyCell.swift */,
 				BE42888729534752007B9F06 /* CreateCompanyController.swift */,
 				BEFCA066295E0FFE009B576E /* CompaniesController+CreateCompany.swift */,
 				BEFCA068295E106F009B576E /* CompaniesController+UITableView.swift */,
-				BEDE3071296376AF00BF0C38 /* EmployeesController.swift */,
-				BEDE3076296385EE00BF0C38 /* CreateEmployeeController.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
