@@ -11,6 +11,7 @@ protocol CreateEmployeeControllerDelegate: AnyObject {
     func didAddEmployee(employee: Employee)
 }
 class CreateEmployeeController: UIViewController {
+    var company: Company?
     var delegate: CreateEmployeeControllerDelegate?
     
     private lazy var nameLabel: UILabel = {
@@ -54,7 +55,9 @@ class CreateEmployeeController: UIViewController {
     
     @objc func handleSave() {
         guard let employeeName = nameTextField.text else { return }
-        let (employee, error) = CoreDataManager.shared.createEmployee(employeeName: employeeName)
+        guard let company = company else { return }
+        
+        let (employee, error) = CoreDataManager.shared.createEmployee(employeeName: employeeName, company: company )
         if let error = error {
             print(error)
         }

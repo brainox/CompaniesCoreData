@@ -27,15 +27,10 @@ class EmployeesController: UITableViewController {
     }
     
     private func fetchEmployees() {
-        let context = CoreDataManager.shared.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<Employee>(entityName: "Employee")
-        do {
-            let employees = try context.fetch(fetchRequest)
-            self.employees = employees
-        }catch let err {
-            print("Failed to fetch employees:", err)
+        guard let companyEmployees = self.company?.employees?.allObjects as? [Employee] else {
+            return
         }
+        self.employees = companyEmployees
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -58,6 +53,7 @@ class EmployeesController: UITableViewController {
     @objc func handleAdd() {
         let createEmployeeController = CreateEmployeeController()
         createEmployeeController.delegate = self
+        createEmployeeController.company = self.company
         let navController = CustomNavigationController(rootViewController: createEmployeeController)
         navController.modalPresentationStyle = .fullScreen
         self.present(navController, animated: true)
