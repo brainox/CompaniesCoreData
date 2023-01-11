@@ -41,8 +41,14 @@ class EmployeesController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
         let employee = employees[indexPath.row]
         cell.textLabel?.text = employee.name
-        if let taxId = employee.employeeInformation?.taxId {
-            cell.textLabel?.text = "\(employee.name ?? "") \(taxId)"
+//        if let taxId = employee.employeeInformation?.taxId {
+//            cell.textLabel?.text = "\(employee.name ?? "") \(taxId)"
+//        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        
+        if let birthday = employee.employeeInformation?.birthday {
+            cell.textLabel?.text = "\(employee.name ?? "") \(dateFormatter.string(from: birthday))"
         }
         cell.backgroundColor = .tealColor
         cell.textLabel?.textColor = .white
