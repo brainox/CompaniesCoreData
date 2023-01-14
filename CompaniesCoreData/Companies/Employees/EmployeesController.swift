@@ -13,6 +13,11 @@ class EmployeesController: UITableViewController {
     var employees = [Employee]()
     let cellID = "employeeCellId"
     
+    var shortNameEmployees = [Employee]()
+    var longNameEmployees = [Employee]()
+    var reallyLongNameEmployees = [Employee]()
+    var allEmployees = [[Employee]]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         fetchEmployees()
@@ -30,16 +35,49 @@ class EmployeesController: UITableViewController {
         guard let companyEmployees = self.company?.employees?.allObjects as? [Employee] else {
             return
         }
-        self.employees = companyEmployees
+        
+        shortNameEmployees = companyEmployees.filter({ employee in
+            if let count = employee.name?.count {
+                return count < 6
+            }
+            return false
+        })
+        
+        longNameEmployees = companyEmployees.filter({ employee in
+            if let count = employee.name?.count  {
+                return count > 6 && count < 9
+            }
+            return false
+        })
+        
+        reallyLongNameEmployees = companyEmployees.filter({ employee in
+            if let count = employee.name?.count {
+                return count > 9
+            }
+            return false
+        })
+        
+        allEmployees = [
+            shortNameEmployees,
+            longNameEmployees,
+            reallyLongNameEmployees
+        ]
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return allEmployees.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return employees.count
+        
+        return allEmployees[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let employee = employees[indexPath.row]
+        
+        let employee = allEmployees[indexPath.section][indexPath.row]
+        
         cell.textLabel?.text = employee.name
 //        if let taxId = employee.employeeInformation?.taxId {
 //            cell.textLabel?.text = "\(employee.name ?? "") \(taxId)"
@@ -55,6 +93,29 @@ class EmployeesController: UITableViewController {
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 15)
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = .white
+        let label = IndentedLabels()
+        
+        if section == 0 {
+            label.text = "Short names"
+        } else if section == 1 {
+            label.text = "Long names"
+        } else {
+            label.text = "Really Long names"
+        }
+        label.textColor = .darkBlue
+        label.backgroundColor = .lightBlue
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
     
     @objc func handleAdd() {
         let createEmployeeController = CreateEmployeeController()
