@@ -42,6 +42,17 @@ class CreateEmployeeController: UIViewController {
         return textField
     }()
     
+    private lazy var employeeTypeSegmentedControl: UISegmentedControl =  {
+        let items = ["Executive", "Senior Management", "Staff"]
+        let segmentedControl = UISegmentedControl(items: items)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.selectedSegmentTintColor = .darkBlue
+        let attribute: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.white]
+        segmentedControl.setTitleTextAttributes(attribute, for: .selected)
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        return segmentedControl
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "Create Employees"
@@ -53,12 +64,13 @@ class CreateEmployeeController: UIViewController {
     }
     
     func setupUI() {
-        _ = setupLightBlueBackgroundView(height: 100)
+        _ = setupLightBlueBackgroundView(height: 150)
         
         view.addSubview(nameLabel)
         view.addSubview(nameTextField)
         view.addSubview(birthdayLabel)
         view.addSubview(birthdayTextField)
+        view.addSubview(employeeTypeSegmentedControl)
         
         nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
@@ -79,6 +91,11 @@ class CreateEmployeeController: UIViewController {
         birthdayTextField.leadingAnchor.constraint(equalTo: birthdayLabel.trailingAnchor).isActive = true
         birthdayTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
         birthdayTextField.bottomAnchor.constraint(equalTo: birthdayLabel.bottomAnchor).isActive = true
+        
+        employeeTypeSegmentedControl.topAnchor.constraint(equalTo: birthdayLabel.bottomAnchor).isActive = true
+        employeeTypeSegmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        employeeTypeSegmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+        employeeTypeSegmentedControl.heightAnchor.constraint(equalToConstant: 34).isActive = true
     }
     
     @objc func handleSave() {
@@ -100,12 +117,13 @@ class CreateEmployeeController: UIViewController {
             showError(title: "Bad Date", message: "Birthday date entered is not valid")
             return
         }
+        
+        guard let employeeType = employeeTypeSegmentedControl.titleForSegment(at: employeeTypeSegmentedControl.selectedSegmentIndex) else { return }
     
-        let (employee, error) = CoreDataManager.shared.createEmployee(employeeName: employeeName, birthday: birthdayDate, company: company )
+        let (employee, error) = CoreDataManager.shared.createEmployee(employeeName: employeeName, employeeType: employeeType, birthday: birthdayDate, company: company )
         if let error = error {
             print(error)
         }
-        
         dismiss(animated: true) {
             self.delegate?.didAddEmployee(employee: employee!)
         }
