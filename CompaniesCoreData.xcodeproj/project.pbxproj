@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE2F8984297B471400739769 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2F8983297B471300739769 /* EmployeeType.swift */; };
 		BE3CB4732959B16400DFB8BC /* CompanyCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE3CB4712959B16300DFB8BC /* CompanyCoreData.xcdatamodeld */; };
 		BE3CB4752959BFA400DFB8BC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */; };
 		BE428886295341EF007B9F06 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428885295341EF007B9F06 /* Company.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE2F8983297B471300739769 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmployeeType.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/EmployeeType.swift"; sourceTree = "<group>"; };
 		BE3CB4722959B16400DFB8BC /* CompanyCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyCoreData.xcdatamodel; sourceTree = "<group>"; };
 		BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BE428885295341EF007B9F06 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			children = (
 				BEDE3071296376AF00BF0C38 /* EmployeesController.swift */,
 				BEDE3076296385EE00BF0C38 /* CreateEmployeeController.swift */,
+				BE2F8983297B471300739769 /* EmployeeType.swift */,
 			);
 			path = Employees;
 			sourceTree = "<group>";
@@ -202,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFCA067295E0FFE009B576E /* CompaniesController+CreateCompany.swift in Sources */,
+				BE2F8984297B471400739769 /* EmployeeType.swift in Sources */,
 				BEDCC6AE2952A282008D04B2 /* CustomNavigationController.swift in Sources */,
 				BEDCC69E2952979C008D04B2 /* CompaniesController.swift in Sources */,
 				BEFCA069295E106F009B576E /* CompaniesController+UITableView.swift in Sources */,
