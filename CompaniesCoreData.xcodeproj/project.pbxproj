@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE2F8984297B471400739769 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE2F8983297B471300739769 /* EmployeeType.swift */; };
 		BE3CB4732959B16400DFB8BC /* CompanyCoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BE3CB4712959B16300DFB8BC /* CompanyCoreData.xcdatamodeld */; };
 		BE3CB4752959BFA400DFB8BC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */; };
 		BE428886295341EF007B9F06 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE428885295341EF007B9F06 /* Company.swift */; };
 		BE42888829534752007B9F06 /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42888729534752007B9F06 /* CreateCompanyController.swift */; };
+		BE4E935E297FE00A00B14B73 /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4E935D297FE00A00B14B73 /* EmployeeType.swift */; };
 		BEDCC69A2952979C008D04B2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC6992952979C008D04B2 /* AppDelegate.swift */; };
 		BEDCC69C2952979C008D04B2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC69B2952979C008D04B2 /* SceneDelegate.swift */; };
 		BEDCC69E2952979C008D04B2 /* CompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDCC69D2952979C008D04B2 /* CompaniesController.swift */; };
@@ -30,11 +30,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		BE2F8983297B471300739769 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EmployeeType.swift; path = "../../../../../../Library/Mobile Documents/com~apple~CloudDocs/EmployeeType.swift"; sourceTree = "<group>"; };
 		BE3CB4722959B16400DFB8BC /* CompanyCoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CompanyCoreData.xcdatamodel; sourceTree = "<group>"; };
 		BE3CB4742959BFA400DFB8BC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		BE428885295341EF007B9F06 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		BE42888729534752007B9F06 /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
+		BE4E935D297FE00A00B14B73 /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
 		BEDCC6962952979C008D04B2 /* CompaniesCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CompaniesCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEDCC6992952979C008D04B2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEDCC69B2952979C008D04B2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +70,7 @@
 			children = (
 				BEDE3071296376AF00BF0C38 /* EmployeesController.swift */,
 				BEDE3076296385EE00BF0C38 /* CreateEmployeeController.swift */,
-				BE2F8983297B471300739769 /* EmployeeType.swift */,
+				BE4E935D297FE00A00B14B73 /* EmployeeType.swift */,
 			);
 			path = Employees;
 			sourceTree = "<group>";
@@ -205,7 +205,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEFCA067295E0FFE009B576E /* CompaniesController+CreateCompany.swift in Sources */,
-				BE2F8984297B471400739769 /* EmployeeType.swift in Sources */,
 				BEDCC6AE2952A282008D04B2 /* CustomNavigationController.swift in Sources */,
 				BEDCC69E2952979C008D04B2 /* CompaniesController.swift in Sources */,
 				BEFCA069295E106F009B576E /* CompaniesController+UITableView.swift in Sources */,
@@ -217,6 +216,7 @@
 				BE42888829534752007B9F06 /* CreateCompanyController.swift in Sources */,
 				BEDCC6B02952AE8E008D04B2 /* UIColor+theme.swift in Sources */,
 				BEE4221D295C1CF4009F3262 /* CompanyCell.swift in Sources */,
+				BE4E935E297FE00A00B14B73 /* EmployeeType.swift in Sources */,
 				BEDCC69C2952979C008D04B2 /* SceneDelegate.swift in Sources */,
 				BE3CB4752959BFA400DFB8BC /* CoreDataManager.swift in Sources */,
 				BE3CB4732959B16400DFB8BC /* CompanyCoreData.xcdatamodeld in Sources */,

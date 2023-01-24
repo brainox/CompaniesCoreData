@@ -18,6 +18,10 @@ class CompaniesController: UITableViewController {
         setUpNavigationStyle()
         setupPlusButtonInNavBar(selector: #selector(handleAddCompany))
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
+        navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
+            UIBarButtonItem(title: "Do Work", style: .plain, target: self, action: #selector(doWork))
+        ]
         tableView.backgroundColor = UIColor.darkBlue
         tableView.separatorColor = .white
         
@@ -84,6 +88,22 @@ class CompaniesController: UITableViewController {
 //            tableView.reloadData()
         } catch let delErr {
             print("Failed to delete objects from Core Data: \(delErr)" )
+        }
+    }
+    
+    @objc func doWork() {
+        CoreDataManager.shared.persistentContainer.performBackgroundTask { (backgroundContext) in
+            (0...20000).forEach { (value) in
+                print(value)
+                let company = Company(context: backgroundContext)
+                company.name = String(value)
+            }
+            
+            do {
+                try backgroundContext.save()
+            } catch let err {
+                print("Failed to save:", err)
+            }
         }
     }
 }
