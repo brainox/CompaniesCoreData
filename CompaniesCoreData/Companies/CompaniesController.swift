@@ -20,7 +20,7 @@ class CompaniesController: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset))
         navigationItem.leftBarButtonItems = [
             UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
-            UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doUpdates))
+            UIBarButtonItem(title: "Nested Updates", style: .plain, target: self, action: #selector(doNestedUpdates))
         ]
         tableView.backgroundColor = UIColor.darkBlue
         tableView.separatorColor = .white
@@ -133,6 +133,50 @@ class CompaniesController: UITableViewController {
                 }
             } catch let err {
                 print("Failed to fetch companies on background:", err)
+            }
+        }
+    }
+    
+    @objc func doNestedUpdates() {
+        DispatchQueue.global(qos: .background).async {
+            // We'll try to perform our updates
+            
+            // we'll first construct a custom MOC (Managed Object Context)
+            let privateContext = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
+            privateContext.parent = CoreDataManager.shared.persistentContainer.viewContext
+            
+            // Execute updates private context now
+            let request: NSFetchRequest<Company> = Company.fetchRequest()
+            request.fetchLimit = 1
+            
+            do {
+                let companies = try privateContext.fetch(request)
+                
+                companies.forEach { company in
+                    print(company.name ?? "")
+                    company.name = "D: \(company.name ?? "")"
+                }
+                
+                do {
+                    try privateContext.save()
+                    
+                    DispatchQueue.main.async {
+                        do  {
+                            let context = CoreDataManager.shared.persistentContainer.viewContext
+                            
+                            if context.hasChanges {
+                                try context.save()
+                            }
+                            self.tableView.reloadData()
+                        } catch let finalSaveErr {
+                            print("Failed to save main context", finalSaveErr)
+                        }
+                    }
+                } catch let saveErr {
+                    print("Failed to save on private context: ", saveErr)
+                }
+            } catch let err {
+                print("Failed to fetch on private context: ", err)
             }
         }
     }
